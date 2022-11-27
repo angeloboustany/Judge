@@ -80,8 +80,13 @@ public class ClientHandler implements Runnable {
                         out.flush();
                         break;
                     case "profile":
-                        Contestant c = Server.leaderboard.getContestant(contestant.getUsername());
-                        out.writeUTF(c.printProfile());
+                        Contestant c;
+                        if (contestant != null) {
+                            c = Server.leaderboard.getContestant(contestant.getUsername());
+                            out.writeUTF(c.printProfile());
+                            out.flush();
+                        }
+                        out.writeUTF("no profile found");
                         out.flush();
                         break;
                     case "create": {

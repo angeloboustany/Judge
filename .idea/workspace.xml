@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="56ed3d5e-6a1e-4e6b-8303-4a4f3100e6cb" name="Changes" comment="fixed null pointer issue in leaderboard Class">
-      <change beforePath="$PROJECT_DIR$/src/ProblemHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProblemHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Submissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Submissions.java" afterDir="false" />
+    <list default="true" id="56ed3d5e-6a1e-4e6b-8303-4a4f3100e6cb" name="Changes" comment="fixed null pointer issues">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/submissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/submissions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +74,7 @@
       <workItem from="1669300940496" duration="849000" />
       <workItem from="1669358760452" duration="7842000" />
       <workItem from="1669553109242" duration="5226000" />
-      <workItem from="1669563131653" duration="2660000" />
+      <workItem from="1669563131653" duration="3630000" />
     </task>
     <task id="LOCAL-00001" summary="fixed null pointer issue in leaderboard Class">
       <created>1669565327692</created>
@@ -81,7 +83,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669565327692</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fixed null pointer issues">
+      <created>1669565877662</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1669565877662</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -100,6 +109,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed null pointer issue in leaderboard Class" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed null pointer issue in leaderboard Class" />
+    <MESSAGE value="fixed null pointer issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed null pointer issues" />
   </component>
 </project>

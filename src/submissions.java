@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class Submissions {
     private static DataOutputStream out = null;
     
-    public Submissions(){};
+    public Submissions(){}
 
     public static void addSubmission(String id, String path, String user, String extention) throws IOException{
         String problemId = id;
@@ -22,7 +22,7 @@ public class Submissions {
         String username = user;
         String testout;
         String inputFile;
-        long timeInMillis;;
+        long timeInMillis;
 
         ProblemNode problem = Server.problems.getProblem(problemId);
         if (problem == null) {
@@ -44,14 +44,16 @@ public class Submissions {
     public void scanDirectory(String path) {
         File dir = new File(path);
         File[] files = dir.listFiles();
-        for (File file : files) {
-            if (file.isFile()) {
-                String fileName = file.getName();
-                String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
-                if (ext.equals("java") || ext.equals("py") || ext.equals("cpp")) {
-                    String problemId = fileName.substring(1, fileName.indexOf("U"));
-                    String filePath = Paths.get(path, fileName).toString();
-                    System.out.println("problemId: " + problemId + " filePath: " + filePath);
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    String fileName = file.getName();
+                    String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+                    if (ext.equals("java") || ext.equals("py") || ext.equals("cpp")) {
+                        String problemId = fileName.substring(1, fileName.indexOf("U"));
+                        String filePath = Paths.get(path, fileName).toString();
+                        System.out.println("problemId: " + problemId + " filePath: " + filePath);
+                    }
                 }
             }
         }
@@ -184,8 +186,12 @@ public class Submissions {
             System.err.println("in match() " + ex);
         } finally {
             try {
-                b1.close();
-                b2.close();
+                if (b1 != null) {
+                    b1.close();
+                }
+                if (b2 != null) {
+                    b2.close();
+                }
             } catch (IOException ex) {
                 System.err.println("in match() " + ex);
             }
