@@ -6,8 +6,8 @@ public class Queue {
         list = new LinkedList();
     }
     
-    public void enqueue(Object data) {
-        list.addFirst(data);
+    public void enqueue(SubNode data) {
+        list.addLast(data);
     }
     
     public void dequeue() {
@@ -15,12 +15,12 @@ public class Queue {
     }
 
     //peek at the first element
-    public Object peek() {
+    public SubNode peek() {
         return list.getFirst();
     }
     
     public boolean isEmpty() {
-        return list.isEmpty();
+        return peek() == null;
     }
     
     public int getSize() {
@@ -30,5 +30,5 @@ public class Queue {
     public void printQueue() {
         list.printList();
     }
-    
+
 }

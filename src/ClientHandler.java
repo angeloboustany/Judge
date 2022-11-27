@@ -5,8 +5,8 @@ import java.net.Socket;
 
 public class ClientHandler implements Runnable {
     private final Socket clientSocket;
-    private static DataOutputStream out = null;
-    private static DataInputStream in = null;
+    private DataOutputStream out = null;
+    private DataInputStream in = null;
     
     public ClientHandler(Socket socket){
         this.clientSocket = socket;
@@ -17,73 +17,116 @@ public class ClientHandler implements Runnable {
             out = new DataOutputStream(clientSocket.getOutputStream());
             Contestant contestant = null;
 
+            label:
             while (true){
                 String request = in.readUTF();
                 System.out.println("log: "+ request);
 
-                if (request.equals("end")){
-                    System.out.println("Client disconnected");
-                    break;
-                }
-                else if (request.equals("help")){
-                    out.writeUTF("Available commands: end, help, submit, leaderboard, submissions, profile");
-                    out.flush();
-                    continue;
-                }
-                else if (request.equals("submit")){
-                    // receive file
-                    if (contestant == null){
-                        out.writeUTF("false");
+                switch (request) {
+                    case "end":
+                        System.out.println("Client disconnected");
+                        //save leaderboard
+                        Server.leaderboard.saveLeaderboard();
+                        break label;
+                    case "help":
+                        out.writeUTF("Available commands: end, help, search, submit, create, problems, leaderboard, profile, deleteProblem, deleteProfile");
                         out.flush();
-                        continue;
-                    }
-                    out.writeUTF("true");
-                    out.flush();
-                    String problemId = in.readUTF();
-                    String ext = in.readUTF();
-                    if (ext.equals("noExt")){
-                        continue;
-                    }
-                    receiveFile("submissions" + "/" + contestant.getUsername() + "-" + problemId + "."+ ext);
-                }
-                else if (request.equals("register")){
-
-                    System.out.println("Waiting for a username...");
-                    String username = in.readUTF();
-                    if (Server.leaderboard.searchContestant(username)) {
-                        out.writeUTF("#");
+                        break;
+                    case "submit": {
+                        // receive file
+                        if (contestant == null) {
+                            out.writeUTF("false");
+                            out.flush();
+                            continue;
+                        }
+                        out.writeUTF("true");
                         out.flush();
-                        contestant = Server.leaderboard.getContestant(username);
-                        continue;
-                    }
-                    out.writeUTF(" ");
-                    System.out.println("Waiting for a name...");
-                    String name = in.readUTF();
-                    System.out.println("Waiting for an email...");
-                    String email = in.readUTF();
+                        String problemId = in.readUTF();
+                        String ext = in.readUTF();
+                        if (ext.equals("noExt")) {
+                            continue;
+                        }
 
-                    contestant = new Contestant(name, email, username);
-                    System.out.println("New contestant registered: " + contestant.getName());
-                    Server.leaderboard.addContestant(contestant);
-                    contestant.saveContestant();
-                    continue;
-                }
-                else if (request.equals("leaderboard")){
-                    out.writeUTF(Server.leaderboard.printLeaderboard());
-                    out.flush();
-                    continue;
-                }
-                else if (request.equals("submissions")){
-                    //TODO: send submissions
-                    continue;
-                }
-                else if (request.equals("profile")){
-                    //TODO: implement profile
-                }
-                else{
-                    out.writeUTF("<< Invalid command (Type 'help' for list of commands): ");
-                    out.flush();
-                    continue;
+                        String path = "submissions/" + "P" + problemId + "U" + contestant.getUsername() + "." + ext;
+                        receiveFile(path);
+                        Submissions.addSubmission(problemId, path, contestant.getUsername(), ext);
+                        break;
+                    }
+                    case "register":
+
+                        System.out.println("Waiting for a username...");
+                        String username = in.readUTF();
+                        if (Server.leaderboard.searchContestant(username)) {
+                            out.writeUTF("#");
+                            out.flush();
+                            contestant = Server.leaderboard.getContestant(username);
+                            Server.connections.put(username, clientSocket);
+                            continue;
+                        }
+                        out.writeUTF(" ");
+                        Server.connections.put(username, clientSocket);
+                        System.out.println("Waiting for a name...");
+                        String name = in.readUTF();
+                        System.out.println("Waiting for an email...");
+                        String email = in.readUTF();
+
+                        contestant = new Contestant(name, email, username);
+                        System.out.println("New contestant registered: " + contestant.getName());
+                        Server.leaderboard.addContestant(contestant);
+                        contestant.saveContestant();
+                        break;
+                    case "leaderboard":
+                        out.writeUTF(Server.leaderboard.printLeaderboard());
+                        out.flush();
+                        break;
+                    case "profile":
+                        Contestant c = Server.leaderboard.getContestant(contestant.getUsername());
+                        out.writeUTF(c.printProfile());
+                        out.flush();
+                        break;
+                    case "create": {
+                        String problemId = in.readUTF();
+                        String problemName = in.readUTF();
+                        String problemDescription = in.readUTF();
+                        String inputFile = in.readUTF();
+                        String pathToInputfile = "subIn/" + inputFile + ".txt";
+                        receiveFile(pathToInputfile);
+                        String testout = in.readUTF();
+                        String pathToTestout = "subTest/" + testout + ".txt";
+                        receiveFile(pathToTestout);
+                        int timeInMillis = Integer.parseInt(in.readUTF());
+                        int memoryInBytes = Integer.parseInt(in.readUTF());
+
+                        ProblemNode problem = new ProblemNode(problemId, problemName, problemDescription, inputFile, testout, timeInMillis, memoryInBytes);
+                        Server.problems.addProblem(problem);
+                        problem.saveProblem();
+                        break;
+                    }
+                    case "problems":
+                        out.writeUTF(Server.problems.printProblems());
+                        out.flush();
+                        break;
+                    case "deleteProblem": {
+                        String problemId = in.readUTF();
+                        Server.problems.deleteProblem(problemId);
+                        break;
+                    }
+                    case "deleteProfile":
+                        if (contestant != null) {
+                            Server.leaderboard.removeContestant(contestant);
+                            Server.connections.remove(contestant.getUsername());
+                        }
+                        break label;
+                    case "search": {
+                        String problem = in.readUTF();
+                        out.writeUTF(Server.problems.getProblem(problem).displayProblem());
+                        out.flush();
+                        break;
+                    }
+                    default:
+                        out.writeUTF("<< Invalid command (Type 'help' for list of commands): ");
+                        out.flush();
+                        break;
                 }
             }
         }catch (Exception e){

@@ -1,0 +1,7 @@
+Problem ID: A
+Problem Name: Double
+Problem Description: return a double of integer
+Input File: inputA
+Testout: outputA
+Time in Millis: 1000
+Memory in Bytes: 30000

@@ -48,6 +48,9 @@ public class Leaderboard {
                 }
                 current = current.next;
             }
+            //delete the file
+            File file = new File("contestant/" + contestant.getUsername());
+            file.delete();
         }
     }
 
@@ -131,6 +134,19 @@ public class Leaderboard {
             }
         }
         return null;
+    }
+
+    //save the leaderboard
+    public void saveLeaderboard() {
+        if (head == null) {
+            System.out.println("The list is empty");
+        } else {
+            Contestant current = head;
+            while (current != null) {
+                current.saveContestant();
+                current = current.next;
+            }
+        }
     }
 
     public int getSize() {
