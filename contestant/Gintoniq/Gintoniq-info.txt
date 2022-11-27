@@ -3,11 +3,11 @@ Email: angeloboustany5@gmail.com
 Username: Gintoniq
 Score: 11
 Number of solved problems: 3
-Number of incorrect attempts: 33
-Number of WA: 16
+Number of incorrect attempts: 127
+Number of WA: 65
 Number of AC: 3
-Number of TLE: 7
+Number of TLE: 33
 Number of CE: 3
-Number of RE: 3
+Number of RE: 16
 Number of CS: 3
-Number of RS: 1
+Number of RS: 7

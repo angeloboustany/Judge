@@ -59,12 +59,12 @@ public class Leaderboard {
             System.out.println("The list is empty");
         } else {
             Contestant current = head;
-            String leaderboard = "";
+            StringBuilder leaderboard = new StringBuilder();
             while (current != null) {
-                leaderboard += current.getUsername() + " " + current.getName() + " " + current.getScore() + " " + current.getNbOfSolvedProblems() + " " + current.getNumberOfincorrectAttempts() + " \n";
+                leaderboard.append(current.getUsername()).append(" ").append(current.getName()).append(" ").append(current.getScore()).append(" ").append(current.getNbOfSolvedProblems()).append(" ").append(current.getNumberOfincorrectAttempts()).append(" \n");
                 current = current.next;
             }
-            return leaderboard;
+            return leaderboard.toString();
         }
         return null;
     }
@@ -74,7 +74,7 @@ public class Leaderboard {
             System.out.println("The list is empty");
         } else {
             Contestant current = head;
-            Contestant index = null;
+            Contestant index;
             Contestant temp;
             while (current != null) {
                 index = current.next;
@@ -94,12 +94,14 @@ public class Leaderboard {
     public void loadLeaderboard() {
         File folder = new File("contestant");
         File[] listOfFiles = folder.listFiles();
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isDirectory()) {
-                Contestant contestant = new Contestant();
-                contestant.loadContestant(listOfFiles[i].getName());
-                addContestant(contestant);
-                sortLeaderboard();
+        if (listOfFiles != null) {
+            for (File listOfFile : listOfFiles) {
+                if (listOfFile.isDirectory()) {
+                    Contestant contestant = new Contestant();
+                    contestant.loadContestant(listOfFile.getName());
+                    addContestant(contestant);
+                    sortLeaderboard();
+                }
             }
         }
     }

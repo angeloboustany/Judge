@@ -3,11 +3,11 @@ Email: elsa@gmail.com
 Username: Elsa
 Score: 1
 Number of solved problems: 1
-Number of incorrect attempts: 1
-Number of WA: 0
+Number of incorrect attempts: 6
+Number of WA: 3
 Number of AC: 1
-Number of TLE: 0
+Number of TLE: 1
 Number of CE: 1
 Number of RE: 0
-Number of CS: 0
+Number of CS: 1
 Number of RS: 0
