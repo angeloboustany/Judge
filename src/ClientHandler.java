@@ -7,18 +7,22 @@ public class ClientHandler implements Runnable {
     private final Socket clientSocket;
     private DataOutputStream out = null;
     private DataInputStream in = null;
-    
+    Contestant contestant = null;
     public ClientHandler(Socket socket){
         this.clientSocket = socket;
+    }
+    //set Contestant
+    public void setContestant(Contestant contestant){
+        this.contestant = contestant;
     }
     public void run (){
         try{
             in = new DataInputStream(clientSocket.getInputStream());
             out = new DataOutputStream(clientSocket.getOutputStream());
-            Contestant contestant = null;
 
             label:
             while (true){
+                System.out.println("Waiting for command");
                 String request = in.readUTF();
                 System.out.println("log: "+ request);
 

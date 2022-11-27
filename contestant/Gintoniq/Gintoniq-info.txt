@@ -1,13 +1,13 @@
 Name: Angelo
 Email: angeloboustany5@gmail.com
 Username: Gintoniq
-Score: 11
-Number of solved problems: 3
-Number of incorrect attempts: 127
-Number of WA: 65
-Number of AC: 3
-Number of TLE: 33
-Number of CE: 3
-Number of RE: 16
-Number of CS: 3
-Number of RS: 7
+Score: 11775
+Number of solved problems: 12
+Number of incorrect attempts: 6699
+Number of WA: 3472
+Number of AC: 12
+Number of TLE: 1798
+Number of CE: 10
+Number of RE: 930
+Number of CS: 9
+Number of RS: 480

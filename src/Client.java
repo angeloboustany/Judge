@@ -14,7 +14,7 @@ public class Client {
         Socket socket = null;
         Scanner scanner = new Scanner(System.in);
         try {
-            socket = new Socket("ec2-54-210-148-108.compute-1.amazonaws.com", 5000);
+            socket = new Socket("127.0.0.1", 5000);
 
             System.out.println("<< Connected to server");
             System.out.println("<< Enter 'end' to close the connection");

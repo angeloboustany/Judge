@@ -1,13 +1,13 @@
 Name: Elsa
 Email: elsa@gmail.com
 Username: Elsa
-Score: 1
-Number of solved problems: 1
-Number of incorrect attempts: 6
-Number of WA: 3
-Number of AC: 1
-Number of TLE: 1
+Score: 5
+Number of solved problems: 2
+Number of incorrect attempts: 12
+Number of WA: 6
+Number of AC: 2
+Number of TLE: 3
 Number of CE: 1
-Number of RE: 0
+Number of RE: 1
 Number of CS: 1
 Number of RS: 0

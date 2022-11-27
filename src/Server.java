@@ -6,6 +6,7 @@ public class Server {
     public static Queue submissionsQueue = new Queue();
     public static HashMap connections = new HashMap();
     public static ProblemHandler problems = new ProblemHandler();
+    public static boolean verdictRunning = false;
     public static void main(String[] args) {
         ServerSocket server = null;
         try {
