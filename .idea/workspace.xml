@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="56ed3d5e-6a1e-4e6b-8303-4a4f3100e6cb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contestant/Elsa/Elsa-info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/contestant/Elsa/Elsa-info.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contestant/Gintoniq/Gintoniq-info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/contestant/Gintoniq/Gintoniq-info.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Leaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Leaderboard.java" afterDir="false" />
+    <list default="true" id="56ed3d5e-6a1e-4e6b-8303-4a4f3100e6cb" name="Changes" comment="fixed null pointer issue in leaderboard Class">
+      <change beforePath="$PROJECT_DIR$/src/ProblemHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProblemHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Submissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Submissions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,8 +72,16 @@
       <workItem from="1669300940496" duration="849000" />
       <workItem from="1669358760452" duration="7842000" />
       <workItem from="1669553109242" duration="5226000" />
-      <workItem from="1669563131653" duration="2036000" />
+      <workItem from="1669563131653" duration="2660000" />
     </task>
+    <task id="LOCAL-00001" summary="fixed null pointer issue in leaderboard Class">
+      <created>1669565327692</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669565327692</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -91,5 +97,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed null pointer issue in leaderboard Class" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed null pointer issue in leaderboard Class" />
   </component>
 </project>

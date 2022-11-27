@@ -144,11 +144,13 @@ public class ProblemHandler {
     public void loadProblems() {
         File folder = new File("problems");
         File[] listOfFiles = folder.listFiles();
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
-                ProblemNode problem = new ProblemNode();
-                problem.loadProblems(listOfFiles[i].getName());
-                addProblem(problem);
+        if (listOfFiles != null) {
+            for (File listOfFile : listOfFiles) {
+                if (listOfFile.isFile()) {
+                    ProblemNode problem = new ProblemNode();
+                    problem.loadProblems(listOfFile.getName());
+                    addProblem(problem);
+                }
             }
         }
     }
