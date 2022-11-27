@@ -12,10 +12,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Submissions {
     private static DataOutputStream out = null;
-    
+    private static String Verdict;
+
     public Submissions(){}
 
-    public static void addSubmission(String id, String path, String user, String extention) throws IOException{
+    public static void addSubmission(String id, String path, String user, String extention) {
         String problemId = id;
         String filePath = path;
         String language = extention;
@@ -38,7 +39,26 @@ public class Submissions {
         System.out.println("Submission added to queue");
         System.out.println("Checking queue..." + (Server.submissionsQueue.peek().getUsername()));
         System.out.println("Verdict Judge is running");
+        while (Server.verdictRunning) {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        Server.verdictRunning = true;
+        System.out.println("Verdict Judge is running");
         VerdictJudge();
+        try {
+            System.out.println("Sending verdict to user...");
+            Socket clientSocketV = Server.connections.get(username);
+            out = new DataOutputStream(clientSocketV.getOutputStream());
+            out.writeUTF("Verdict: " + Verdict);
+            out.flush();
+        } catch (Exception e) {
+            System.out.println("Error in sending verdict to client" + e);
+        }
+        Server.verdictRunning = false;
     }
 
     public void scanDirectory(String path) {
@@ -287,27 +307,18 @@ public class Submissions {
             }
             finally{
                 System.out.println("Verdict: " + VERDICT);
-                try {
-                    System.out.println("Sending verdict to user...");
-                    Socket clientSocket = Server.connections.get(username);
-                    out = new DataOutputStream(clientSocket.getOutputStream());
-                    out.writeUTF("Verdict: " + VERDICT);
-                    out.flush();
-                } catch (Exception e) {
-                    System.out.println("Error in sending verdict to client" + e);
-                }
             }
-
+            Verdict = VERDICT;
             Server.leaderboard.sortLeaderboard();
             Server.submissionsQueue.dequeue();
         }
         // check if the queue has any submissions and then run the verdict judge
-        while(true){
+        /*while(true){
             if (!Server.submissionsQueue.isEmpty()) {
                 System.out.println("entered 2 while");
                 VerdictJudge();
                 break;
             }
-        }
+        }*/
     }
 }
